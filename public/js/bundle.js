@@ -9908,12 +9908,62 @@ window.addEventListener('DOMContentLoaded', function () {
 
   var sliderFirst = __webpack_require__(/*! ./parts/sliderFirst */ "./src/parts/sliderFirst.js"),
       sliderFeedback = __webpack_require__(/*! ./parts/sliderFeedback */ "./src/parts/sliderFeedback.js"),
-      showStyle = __webpack_require__(/*! ./parts/buttons */ "./src/parts/buttons.js");
+      showStyle = __webpack_require__(/*! ./parts/buttons */ "./src/parts/buttons.js"),
+      calc = __webpack_require__(/*! ./parts/calc */ "./src/parts/calc.js"),
+      accordion = __webpack_require__(/*! ./parts/accordion */ "./src/parts/accordion.js");
 
   sliderFirst();
   sliderFeedback();
   showStyle();
+  calc();
+  accordion();
 }); //конец DOMContentLoaded
+
+/***/ }),
+
+/***/ "./src/parts/accordion.js":
+/*!********************************!*\
+  !*** ./src/parts/accordion.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function accordion() {
+  var heading = document.querySelectorAll('.accordion-heading'),
+      block = document.querySelectorAll('.accordion-block');
+
+  function closeBlock() {
+    block.forEach(function (item) {
+      item.style.display = 'none';
+    });
+    heading.forEach(function (item) {
+      item.classList.remove('ui-accordion-header-active');
+    });
+  }
+
+  closeBlock();
+
+  var _loop = function _loop(i) {
+    heading[i].addEventListener("click", function () {
+      this.classList.toggle("ui-accordion-header-active");
+
+      if (block[i].style.display == 'block') {
+        closeBlock();
+        block[i].style.display = 'none';
+      } else {
+        closeBlock();
+        this.classList.toggle("ui-accordion-header-active");
+        block[i].style.display = 'block';
+      }
+    });
+  };
+
+  for (var i = 0; i < heading.length; i++) {
+    _loop(i);
+  }
+}
+
+module.exports = accordion;
 
 /***/ }),
 
@@ -9937,6 +9987,75 @@ function showStyle() {
 }
 
 module.exports = showStyle;
+
+/***/ }),
+
+/***/ "./src/parts/calc.js":
+/*!***************************!*\
+  !*** ./src/parts/calc.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function calc() {
+  var size = document.querySelector('#size'),
+      material = document.querySelector('#material'),
+      options = document.querySelector('#options'),
+      promocode = document.querySelector('.promocode'),
+      calcPrice = document.querySelector('.calc-price'),
+      sumSize = 0,
+      sumMat = 0,
+      sumOpt = 0,
+      sumPromo = 0,
+      sum = 0;
+  size.addEventListener('change', function () {
+    sumSize = +this.options[this.selectedIndex].value;
+    sumAll();
+  });
+  material.addEventListener('change', function () {
+    sumMat = +this.options[this.selectedIndex].value;
+    sumAll();
+  });
+  options.addEventListener('change', function () {
+    sumOpt = +this.options[this.selectedIndex].value;
+    sumAll();
+  });
+  promocode.addEventListener('change', function () {
+    if (promocode.value == 'IWANTPOPART') {
+      sumPromo = sum * 0.3;
+      sumAll();
+    } else {
+      sumPromo = 0;
+    }
+
+    sumAll();
+  });
+
+  function sumAll() {
+    if (sumSize == 0 || sumMat == 0) {
+      calcPrice.innerHTML = 'Для расчета нужно выбрать размер картины и материал картины';
+    } else {
+      sum = sumSize + sumMat + sumOpt - sumPromo;
+      animateTotal(sum);
+    }
+  }
+
+  function animateTotal(number) {
+    var step = 500;
+    var start = Date.now();
+    var timer = setInterval(function () {
+      var timePassed = Date.now() - start;
+      calcPrice.innerHTML = step = step + Math.floor(number / 1000);
+
+      if (timePassed > 1500) {
+        clearInterval(timer);
+        calcPrice.innerHTML = number;
+      }
+    });
+  }
+}
+
+module.exports = calc;
 
 /***/ }),
 
