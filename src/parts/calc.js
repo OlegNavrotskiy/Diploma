@@ -26,7 +26,7 @@ function calc() {
       sumPromo = 0;
     }
     sumAll();
-  });      
+  });
 
   function sumAll() {
     if (sumSize == 0 || sumMat == 0) {
