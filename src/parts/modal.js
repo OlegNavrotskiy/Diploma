@@ -64,6 +64,24 @@ function modalGift() {
   }
   setTimeout(popupSixty, 60000);
 
+//scrollBottom
+  function scrollBottom() {
+    let scrollHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+    );
+    if (document.documentElement.scrollTop >= scrollHeight) {
+      alert( 'Высота с учетом прокрутки: ' + scrollHeight );
+    }
+    console.log(document.documentElement.scrollHeight);
+    console.log(document.documentElement.scrollTop);
+    console.log(scrollHeight);
+  }
+  scrollBottom();
+
+
+
 
 }
 module.exports = modalGift;

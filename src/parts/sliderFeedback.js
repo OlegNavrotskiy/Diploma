@@ -30,12 +30,15 @@ plusSlides(-1);
 slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
 slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
 clearInterval(interval);
+interval = runInterval();
+
 });
 next.addEventListener('click', () => {
 plusSlides(1);
 slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
 slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
 clearInterval(interval);
+interval = runInterval();
 });
 
 let interval = runInterval();
@@ -45,7 +48,7 @@ function runInterval() {
     slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
     clearInterval(interval);
     interval = runInterval();
-  }, 4000);
+  }, 5000);
 }
 
 }

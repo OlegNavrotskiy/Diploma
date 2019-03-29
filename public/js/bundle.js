@@ -10190,7 +10190,21 @@ function modalGift() {
     }
   }
 
-  setTimeout(popupSixty, 60000);
+  setTimeout(popupSixty, 60000); //scrollBottom
+
+  function scrollBottom() {
+    var scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+
+    if (document.documentElement.scrollTop >= scrollHeight) {
+      alert('Высота с учетом прокрутки: ' + scrollHeight);
+    }
+
+    console.log(document.documentElement.scrollHeight);
+    console.log(document.documentElement.scrollTop);
+    console.log(scrollHeight);
+  }
+
+  scrollBottom();
 }
 
 module.exports = modalGift;
@@ -10235,12 +10249,14 @@ function sliderFeedback() {
     slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
     slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
     clearInterval(interval);
+    interval = runInterval();
   });
   next.addEventListener('click', function () {
     plusSlides(1);
     slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
     slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
     clearInterval(interval);
+    interval = runInterval();
   });
   var interval = runInterval();
 
@@ -10250,7 +10266,7 @@ function sliderFeedback() {
       slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
       clearInterval(interval);
       interval = runInterval();
-    }, 4000);
+    }, 5000);
   }
 }
 
