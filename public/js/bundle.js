@@ -9910,13 +9910,17 @@ window.addEventListener('DOMContentLoaded', function () {
       sliderFeedback = __webpack_require__(/*! ./parts/sliderFeedback */ "./src/parts/sliderFeedback.js"),
       showStyle = __webpack_require__(/*! ./parts/buttons */ "./src/parts/buttons.js"),
       calc = __webpack_require__(/*! ./parts/calc */ "./src/parts/calc.js"),
-      accordion = __webpack_require__(/*! ./parts/accordion */ "./src/parts/accordion.js");
+      accordion = __webpack_require__(/*! ./parts/accordion */ "./src/parts/accordion.js"),
+      filter = __webpack_require__(/*! ./parts/filter */ "./src/parts/filter.js"),
+      modalGift = __webpack_require__(/*! ./parts/modal */ "./src/parts/modal.js");
 
   sliderFirst();
   sliderFeedback();
   showStyle();
   calc();
   accordion();
+  filter();
+  modalGift();
 }); //конец DOMContentLoaded
 
 /***/ }),
@@ -10059,6 +10063,140 @@ module.exports = calc;
 
 /***/ }),
 
+/***/ "./src/parts/filter.js":
+/*!*****************************!*\
+  !*** ./src/parts/filter.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function filter() {
+  var portfolioWrapper = document.querySelector('.portfolio-wrapper'),
+      portfolioMenu = document.querySelector('.portfolio-menu').children,
+      portfolioNo = document.querySelector('.portfolio-no'),
+      portfolioBlock = document.querySelectorAll('.portfolio-block');
+  portfolioMenu[0].addEventListener('click', activeTabAll);
+  portfolioMenu[1].addEventListener('click', activeTab);
+  portfolioMenu[2].addEventListener('click', activeTab);
+  portfolioMenu[3].addEventListener('click', activeTab);
+  portfolioMenu[4].addEventListener('click', activeTab);
+  portfolioMenu[5].addEventListener('click', activeTabGrand);
+  portfolioMenu[6].addEventListener('click', activeTabGrand);
+
+  function activeTab() {
+    var _this = this;
+
+    for (var i = 0; i < portfolioMenu.length; i++) {
+      portfolioMenu[i].classList.remove('active');
+    }
+
+    portfolioNo.style.display = 'none';
+    portfolioWrapper.innerHTML = ' ';
+    portfolioBlock.forEach(function (item) {
+      if (item.classList == "portfolio-block all ".concat(_this.className)) {
+        portfolioWrapper.innerHTML += item.outerHTML;
+      }
+    });
+    this.classList.add('active');
+  }
+
+  function activeTabAll() {
+    for (var i = 0; i < portfolioMenu.length; i++) {
+      portfolioMenu[i].classList.remove('active');
+    }
+
+    portfolioNo.style.display = 'none';
+    portfolioWrapper.innerHTML = ' ';
+    portfolioBlock.forEach(function (item) {
+      portfolioWrapper.innerHTML += item.outerHTML;
+    });
+    this.classList.add('active');
+  }
+
+  function activeTabGrand() {
+    for (var i = 0; i < portfolioMenu.length; i++) {
+      portfolioMenu[i].classList.remove('active');
+    }
+
+    portfolioWrapper.innerHTML = ' ';
+    portfolioNo.style.display = 'block';
+    this.classList.add('active');
+  }
+}
+
+module.exports = filter;
+
+/***/ }),
+
+/***/ "./src/parts/modal.js":
+/*!****************************!*\
+  !*** ./src/parts/modal.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function modalGift() {
+  var giftBtn = document.querySelector('.fixed-gift'),
+      consultationBtn = document.querySelectorAll('.button-consultation'),
+      popupConsultation = document.querySelector('.popup-consultation'),
+      designBtn = document.querySelectorAll('.button-design'),
+      popupDisign = document.querySelector('.popup-design'),
+      popupGift = document.querySelector('.popup-gift'); //Gift      
+
+  giftBtn.addEventListener('click', function () {
+    popupGift.classList.add('animated', 'fadeIn');
+    popupGift.style.display = 'block';
+    giftBtn.style.display = 'none';
+  });
+  popupGift.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.className === 'popup-gift animated fadeIn' || target.className === 'popup-close') {
+      popupGift.style.display = 'none';
+    }
+  }); //Consultation
+
+  consultationBtn.forEach(function (item) {
+    item.addEventListener('click', function () {
+      popupConsultation.classList.add('animated', 'fadeIn');
+      popupConsultation.style.display = 'block';
+    });
+  });
+  popupConsultation.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.className === 'popup-consultation animated fadeIn' || target.className === 'popup-close') {
+      popupConsultation.style.display = 'none';
+    }
+  }); //Design
+
+  designBtn.forEach(function (item) {
+    item.addEventListener('click', function () {
+      popupDisign.classList.add('animated', 'fadeIn');
+      popupDisign.style.display = 'block';
+    });
+  });
+  popupDisign.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.className === 'popup-design animated fadeIn' || target.className === 'popup-close') {
+      popupDisign.style.display = 'none';
+    }
+  }); //60s
+
+  function popupSixty() {
+    if (popupConsultation.style.display !== 'block' && popupGift.style.display !== 'block' && popupDisign.style.display !== 'block') {
+      popupConsultation.style.display = 'block';
+    }
+  }
+
+  setTimeout(popupSixty, 60000);
+}
+
+module.exports = modalGift;
+
+/***/ }),
+
 /***/ "./src/parts/sliderFeedback.js":
 /*!*************************************!*\
   !*** ./src/parts/sliderFeedback.js ***!
@@ -10096,11 +10234,13 @@ function sliderFeedback() {
     plusSlides(-1);
     slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
     slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
+    clearInterval(interval);
   });
   next.addEventListener('click', function () {
     plusSlides(1);
     slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
     slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+    clearInterval(interval);
   });
   var interval = runInterval();
 

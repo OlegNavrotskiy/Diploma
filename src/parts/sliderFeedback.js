@@ -29,13 +29,15 @@ prev.addEventListener('click', () => {
 plusSlides(-1);
 slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
 slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
-
+clearInterval(interval);
 });
 next.addEventListener('click', () => {
 plusSlides(1);
 slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
 slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+clearInterval(interval);
 });
+
 let interval = runInterval();
 function runInterval() {
   return setInterval(function() {
