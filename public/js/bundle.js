@@ -9957,6 +9957,7 @@ function accordion() {
       } else {
         closeBlock();
         this.classList.toggle("ui-accordion-header-active");
+        block[i].classList.add('animated', 'slideInDown');
         block[i].style.display = 'block';
       }
     });
