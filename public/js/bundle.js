@@ -9957,8 +9957,27 @@ function accordion() {
       } else {
         closeBlock();
         this.classList.toggle("ui-accordion-header-active");
-        block[i].classList.add('animated', 'slideInDown');
         block[i].style.display = 'block';
+        animate(function (timePassed) {
+          block[i].style.top = "".concat(timePassed / 20, "px");
+        }, 600);
+      }
+
+      function animate(draw, duration) {
+        var start = performance.now();
+        requestAnimationFrame(function animate(time) {
+          var timePassed = time - start;
+
+          if (timePassed > duration) {
+            timePassed = duration;
+          }
+
+          draw(timePassed);
+
+          if (timePassed < duration) {
+            requestAnimationFrame(animate);
+          }
+        });
       }
     });
   };
