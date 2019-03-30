@@ -11575,6 +11575,7 @@ function formAll() {
     elem.addEventListener("submit", function (e) {
       e.preventDefault();
       elem.appendChild(statusMessage);
+      statusMessage.innerHTML = message.loading;
       var formData = new FormData(elem);
 
       function postData(data) {
@@ -11700,6 +11701,7 @@ function formAll() {
       elem.addEventListener("submit", function (e) {
         e.preventDefault();
         elem.appendChild(statusMessage);
+        statusMessage.innerHTML = message.loading;
         var formData = new FormData(elem);
 
         function postData(data) {
