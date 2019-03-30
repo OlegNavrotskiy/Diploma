@@ -1,8 +1,8 @@
 function formAll() {
   let message = {
-      loading: 'Загрузка...',
-      success: 'Отправленно',
-      failure: 'Ошибка'
+    loading: 'идет отправка',
+    success: 'отправлено',
+    failure: 'ошибка'
   };
 
   let form = document.querySelector("#formHome"),
@@ -120,6 +120,62 @@ function formAll() {
   inputMessage.forEach((item) => {
     onlyRus(item);
   });
+
+  //Form other
+ let formDesign = document.querySelector('#formDesign'),
+     formConsultation = document.querySelector('#formConsultation');
+  function formModal(form) {
+    let message = {
+      loading: 'идет отправка',
+      success: `<img src="img/send.png" alt="отправлено"><div class="status">отправлено</div>`,
+      failure: `<img src="img/error.png" alt="ошибка"><div class="status">ошибка</div>`
+  };
+  statusMessage = document.createElement("div");
+  statusMessage.classList.add("status");
+
+  function sendForm(elem) {
+    elem.addEventListener("submit", function (e) {
+      e.preventDefault();
+      elem.appendChild(statusMessage);
+
+      let formData = new FormData(elem);
+
+      function postData(data) {
+        return new Promise(function (resolve, reject) {
+          let request = new XMLHttpRequest();
+
+          request.open("POST", "smart.php");
+
+          request.setRequestHeader(
+            "Content-Type",
+            "application/json; charset=utf-8"
+          );
+
+          request.onreadystatechange = function () {
+            if (request.readyState < 4) {
+              resolve();
+            } else if (request.readyState === 4) {
+              if (request.status == 200 && request.status < 3) {
+                resolve();
+              } else {
+                reject();
+              }
+            }
+          };
+          request.send(data);
+        });
+      }
+
+      postData(formData)
+        .then(() => (statusMessage.innerHTML = message.loading))
+        .then(() => (form.innerHTML = message.success))
+        .catch(() => (form.innerHTML = message.failure))
+    });
+  }
+  sendForm(form);
+  }
+  formModal(formDesign);
+  formModal(formConsultation);
 
 }
 module.exports = formAll;

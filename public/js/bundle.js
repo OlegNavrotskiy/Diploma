@@ -11558,9 +11558,9 @@ var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-prom
 
 function formAll() {
   var message = {
-    loading: 'Загрузка...',
-    success: 'Отправленно',
-    failure: 'Ошибка'
+    loading: 'идет отправка',
+    success: 'отправлено',
+    failure: 'ошибка'
   };
   var form = document.querySelector("#formHome"),
       input = form.getElementsByTagName("input"),
@@ -11678,7 +11678,63 @@ function formAll() {
   });
   inputMessage.forEach(function (item) {
     onlyRus(item);
-  });
+  }); //Form other
+
+  var formDesign = document.querySelector('#formDesign'),
+      formConsultation = document.querySelector('#formConsultation');
+
+  function formModal(form) {
+    var message = {
+      loading: 'идет отправка',
+      success: "<img src=\"img/send.png\" alt=\"\u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E\"><div class=\"status\">\u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E</div>",
+      failure: "<img src=\"img/error.png\" alt=\"\u043E\u0448\u0438\u0431\u043A\u0430\"><div class=\"status\">\u043E\u0448\u0438\u0431\u043A\u0430</div>"
+    };
+    statusMessage = document.createElement("div");
+    statusMessage.classList.add("status");
+
+    function sendForm(elem) {
+      elem.addEventListener("submit", function (e) {
+        e.preventDefault();
+        elem.appendChild(statusMessage);
+        var formData = new FormData(elem);
+
+        function postData(data) {
+          return new _Promise(function (resolve, reject) {
+            var request = new XMLHttpRequest();
+            request.open("POST", "smart.php");
+            request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+            request.onreadystatechange = function () {
+              if (request.readyState < 4) {
+                resolve();
+              } else if (request.readyState === 4) {
+                if (request.status == 200 && request.status < 3) {
+                  resolve();
+                } else {
+                  reject();
+                }
+              }
+            };
+
+            request.send(data);
+          });
+        }
+
+        postData(formData).then(function () {
+          return statusMessage.innerHTML = message.loading;
+        }).then(function () {
+          return form.innerHTML = message.success;
+        }).catch(function () {
+          return form.innerHTML = message.failure;
+        });
+      });
+    }
+
+    sendForm(form);
+  }
+
+  formModal(formDesign);
+  formModal(formConsultation);
 }
 
 module.exports = formAll;
