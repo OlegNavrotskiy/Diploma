@@ -11,7 +11,8 @@ let sliderFirst = require('./parts/sliderFirst'),
     filter = require('./parts/filter'),
     modalGift = require('./parts/modal'),
     formAll = require('./parts/form'),
-    hoverPictures = require('./parts/hover');
+    hoverPictures = require('./parts/hover'),
+    hamburger = require('./parts/hamburger');
 
 
 
@@ -24,5 +25,6 @@ filter();
 modalGift();
 formAll();
 hoverPictures();
+hamburger();
 
 }); //конец DOMContentLoaded
