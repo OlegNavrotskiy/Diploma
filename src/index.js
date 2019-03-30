@@ -10,7 +10,8 @@ let sliderFirst = require('./parts/sliderFirst'),
     accordion = require('./parts/accordion'),
     filter = require('./parts/filter'),
     modalGift = require('./parts/modal'),
-    formAll = require('./parts/form');
+    formAll = require('./parts/form'),
+    hoverPictures = require('./parts/hover');
 
 
 
@@ -22,5 +23,6 @@ accordion();
 filter();
 modalGift();
 formAll();
+hoverPictures();
 
 }); //конец DOMContentLoaded

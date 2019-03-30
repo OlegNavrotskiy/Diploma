@@ -59,7 +59,9 @@ function modalGift() {
     if (popupConsultation.style.display !== 'block' &&
      popupGift.style.display !== 'block' &&
      popupDisign.style.display !== 'block') {
+      popupConsultation.classList.add('animated', 'fadeIn');
       popupConsultation.style.display = 'block';
+
      }
   }
   setTimeout(popupSixty, 60000);

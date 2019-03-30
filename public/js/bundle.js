@@ -11302,7 +11302,8 @@ window.addEventListener('DOMContentLoaded', function () {
       accordion = __webpack_require__(/*! ./parts/accordion */ "./src/parts/accordion.js"),
       filter = __webpack_require__(/*! ./parts/filter */ "./src/parts/filter.js"),
       modalGift = __webpack_require__(/*! ./parts/modal */ "./src/parts/modal.js"),
-      formAll = __webpack_require__(/*! ./parts/form */ "./src/parts/form.js");
+      formAll = __webpack_require__(/*! ./parts/form */ "./src/parts/form.js"),
+      hoverPictures = __webpack_require__(/*! ./parts/hover */ "./src/parts/hover.js");
 
   sliderFirst();
   sliderFeedback();
@@ -11312,6 +11313,7 @@ window.addEventListener('DOMContentLoaded', function () {
   filter();
   modalGift();
   formAll();
+  hoverPictures();
 }); //конец DOMContentLoaded
 
 /***/ }),
@@ -11741,6 +11743,36 @@ module.exports = formAll;
 
 /***/ }),
 
+/***/ "./src/parts/hover.js":
+/*!****************************!*\
+  !*** ./src/parts/hover.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function hoverPictures() {
+  var sizesBlock = document.querySelectorAll('.sizes-block');
+  sizesBlock.forEach(function (item, i) {
+    item.onmouseover = function () {
+      this.children[0].src = "img/sizes-".concat(i + 1, "-1.png");
+      this.children[1].style.display = 'none';
+      this.children[2].style.display = 'none';
+      this.children[3].style.display = 'none';
+    };
+
+    item.onmouseout = function () {
+      this.children[0].src = "img/sizes-".concat(i + 1, ".png");
+      this.children[1].style.display = 'block';
+      this.children[2].style.display = 'block';
+      this.children[3].style.display = 'block';
+    };
+  });
+}
+
+module.exports = hoverPictures;
+
+/***/ }),
+
 /***/ "./src/parts/modal.js":
 /*!****************************!*\
   !*** ./src/parts/modal.js ***!
@@ -11799,6 +11831,7 @@ function modalGift() {
 
   function popupSixty() {
     if (popupConsultation.style.display !== 'block' && popupGift.style.display !== 'block' && popupDisign.style.display !== 'block') {
+      popupConsultation.classList.add('animated', 'fadeIn');
       popupConsultation.style.display = 'block';
     }
   }
