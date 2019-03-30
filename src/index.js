@@ -9,7 +9,9 @@ let sliderFirst = require('./parts/sliderFirst'),
     calc = require('./parts/calc'),
     accordion = require('./parts/accordion'),
     filter = require('./parts/filter'),
-    modalGift = require('./parts/modal');
+    modalGift = require('./parts/modal'),
+    formAll = require('./parts/form');
+
 
 
 sliderFirst();
@@ -19,5 +21,6 @@ calc();
 accordion();
 filter();
 modalGift();
+formAll();
 
 }); //конец DOMContentLoaded

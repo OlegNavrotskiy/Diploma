@@ -594,14 +594,14 @@
 			<p class=p-heading>Остались вопросы?</p>
 			<h2>Получите консультацию художника!</h2>
 			<div class="col-md-10 col-md-offset-1">
-				<form action=mailer/smart.php method=POST>
+				<form action=mailer/smart.php method=POST id='formHome'>
 					<div class=input-wrapper>
 						<input type=text name=name placeholder="Ваше имя" required>
 						<input type=text name=phone placeholder="Ваш телефон" required>
 						<input type=text name=email placeholder="Ваш E-mail">
 						<input class=input-text name=message type=text placeholder="Задайте ваш вопрос здесь" required>
 					</div>
-					<button class="button button-order" onclick="yaCounter46630539.reachGoal('btn-consultation'); return true;">Получить консультацию</button>
+					<button class="button button-order" type='submit' onclick="yaCounter46630539.reachGoal('btn-consultation'); return true;">Получить консультацию</button>
 				</form>
 			</div>
 		</div>

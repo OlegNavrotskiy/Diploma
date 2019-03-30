@@ -74,9 +74,6 @@ function modalGift() {
     if (document.documentElement.scrollTop >= scrollHeight) {
       alert( 'Высота с учетом прокрутки: ' + scrollHeight );
     }
-    console.log(document.documentElement.scrollHeight);
-    console.log(document.documentElement.scrollTop);
-    console.log(scrollHeight);
   }
   scrollBottom();
 
