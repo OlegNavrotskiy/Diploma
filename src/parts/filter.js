@@ -18,11 +18,16 @@ function filter() {
     }
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
-    portfolioBlock.forEach((item) => {
+    for (let i = 0; i < portfolioBlock.length; i++) {
+      if (portfolioBlock[i].classList == `portfolio-block all ${this.className}`) {
+        portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
+      }
+    }
+/*     portfolioBlock.forEach((item) => {
       if (item.classList == `portfolio-block all ${this.className}`) {
         portfolioWrapper.innerHTML += item.outerHTML;
       }
-    });
+    }); */
     this.classList.add('active');
   }
 
@@ -32,9 +37,12 @@ function filter() {
     }
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
-    portfolioBlock.forEach((item) => {
+    for (let i = 0; i < portfolioBlock.length; i++) {
+      portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
+    }
+/*     portfolioBlock.forEach((item) => {
       portfolioWrapper.innerHTML += item.outerHTML;
-    });
+    }); */
     this.classList.add('active');
   }
 

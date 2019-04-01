@@ -11513,19 +11513,25 @@ function filter() {
   portfolioMenu[6].addEventListener('click', activeTabGrand);
 
   function activeTab() {
-    var _this = this;
-
     for (var i = 0; i < portfolioMenu.length; i++) {
       portfolioMenu[i].classList.remove('active');
     }
 
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
-    portfolioBlock.forEach(function (item) {
-      if (item.classList == "portfolio-block all ".concat(_this.className)) {
-        portfolioWrapper.innerHTML += item.outerHTML;
+
+    for (var _i = 0; _i < portfolioBlock.length; _i++) {
+      if (portfolioBlock[_i].classList == "portfolio-block all ".concat(this.className)) {
+        portfolioWrapper.innerHTML += portfolioBlock[_i].outerHTML;
       }
-    });
+    }
+    /*     portfolioBlock.forEach((item) => {
+          if (item.classList == `portfolio-block all ${this.className}`) {
+            portfolioWrapper.innerHTML += item.outerHTML;
+          }
+        }); */
+
+
     this.classList.add('active');
   }
 
@@ -11536,9 +11542,15 @@ function filter() {
 
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
-    portfolioBlock.forEach(function (item) {
-      portfolioWrapper.innerHTML += item.outerHTML;
-    });
+
+    for (var _i2 = 0; _i2 < portfolioBlock.length; _i2++) {
+      portfolioWrapper.innerHTML += portfolioBlock[_i2].outerHTML;
+    }
+    /*     portfolioBlock.forEach((item) => {
+          portfolioWrapper.innerHTML += item.outerHTML;
+        }); */
+
+
     this.classList.add('active');
   }
 
@@ -11677,11 +11689,19 @@ function formAll() {
     }
   }
 
-  inputPhone.forEach(function (item) {
-    item.addEventListener("input", mask, false);
-    item.addEventListener("focus", mask, false);
-    item.addEventListener("blur", mask, false);
-  }); //input Text Rus
+  for (var i = 0; i < inputPhone.length; i++) {
+    inputPhone[i].addEventListener("input", mask, false);
+    inputPhone[i].addEventListener("focus", mask, false);
+    inputPhone[i].addEventListener("blur", mask, false);
+  }
+  /*   inputPhone.forEach((item) => {
+      item.addEventListener("input", mask, false);
+      item.addEventListener("focus", mask, false);
+      item.addEventListener("blur", mask, false);
+    });
+   */
+  //input Text Rus
+
 
   var inputName = document.getElementsByName("name"),
       inputMessage = document.getElementsByName("message");
@@ -11692,12 +11712,23 @@ function formAll() {
     });
   }
 
-  inputName.forEach(function (item) {
-    onlyRus(item);
-  });
-  inputMessage.forEach(function (item) {
-    onlyRus(item);
-  }); //Form other
+  for (var _i = 0; _i < inputName.length; _i++) {
+    onlyRus(inputName[_i]);
+  }
+
+  for (var _i2 = 0; _i2 < inputMessage.length; _i2++) {
+    onlyRus(inputMessage[_i2]);
+  }
+  /* 
+    inputName.forEach((item) => {
+      onlyRus(item);
+    });
+    inputMessage.forEach((item) => {
+      onlyRus(item);
+    });
+   */
+  //Form other
+
 
   var formDesign = document.querySelector('#formDesign'),
       formConsultation = document.querySelector('#formConsultation');

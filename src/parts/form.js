@@ -99,13 +99,17 @@ function formAll() {
       setCursorPosition(this.value.length, this);
     }
   }
-
-  inputPhone.forEach((item) => {
+  for (let i = 0; i < inputPhone.length; i++) {
+    inputPhone[i].addEventListener("input", mask, false);
+    inputPhone[i].addEventListener("focus", mask, false);
+    inputPhone[i].addEventListener("blur", mask, false);
+  }
+/*   inputPhone.forEach((item) => {
     item.addEventListener("input", mask, false);
     item.addEventListener("focus", mask, false);
     item.addEventListener("blur", mask, false);
   });
-
+ */
   //input Text Rus
   let inputName = document.getElementsByName("name"),
     inputMessage = document.getElementsByName("message");
@@ -114,13 +118,20 @@ function formAll() {
       input.value = input.value.replace(/[^А-ЯЁ ]/ig, '');
     });
   }
+  for (let i = 0; i < inputName.length; i++) {
+    onlyRus(inputName[i]);
+  }
+  for (let i = 0; i < inputMessage.length; i++) {
+    onlyRus(inputMessage[i]);
+  }
+/* 
   inputName.forEach((item) => {
     onlyRus(item);
   });
   inputMessage.forEach((item) => {
     onlyRus(item);
   });
-
+ */
   //Form other
  let formDesign = document.querySelector('#formDesign'),
      formConsultation = document.querySelector('#formConsultation');
