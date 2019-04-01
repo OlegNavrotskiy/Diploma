@@ -11290,7 +11290,8 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
+__webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js"); //require('nodelist-foreach-polyfill');
+
 
 window.addEventListener('DOMContentLoaded', function () {
   "USE STRICT";
@@ -11317,6 +11318,19 @@ window.addEventListener('DOMContentLoaded', function () {
   hoverPictures();
   hamburger();
 }); //конец DOMContentLoaded
+//polyfill for IE11
+
+if ('NodeList' in window && !NodeList.prototype.forEach) {
+  console.info('polyfill for IE11');
+
+  NodeList.prototype.forEach = function (callback, thisArg) {
+    thisArg = thisArg || window;
+
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}
 
 /***/ }),
 
@@ -11816,12 +11830,14 @@ function modalGift() {
       popupConsultation = document.querySelector('.popup-consultation'),
       designBtn = document.querySelectorAll('.button-design'),
       popupDisign = document.querySelector('.popup-design'),
-      popupGift = document.querySelector('.popup-gift'); //Gift      
+      popupGift = document.querySelector('.popup-gift'),
+      current = false; //Gift      
 
   giftBtn.addEventListener('click', function () {
     popupGift.classList.add('animated', 'fadeIn');
     popupGift.style.display = 'block';
     giftBtn.style.display = 'none';
+    current = true;
   });
   popupGift.addEventListener('click', function (event) {
     var target = event.target;
@@ -11835,6 +11851,7 @@ function modalGift() {
     item.addEventListener('click', function () {
       popupConsultation.classList.add('animated', 'fadeIn');
       popupConsultation.style.display = 'block';
+      current = true;
     });
   });
   popupConsultation.addEventListener('click', function (event) {
@@ -11849,6 +11866,7 @@ function modalGift() {
     item.addEventListener('click', function () {
       popupDisign.classList.add('animated', 'fadeIn');
       popupDisign.style.display = 'block';
+      current = true;
     });
   });
   popupDisign.addEventListener('click', function (event) {
@@ -11866,17 +11884,23 @@ function modalGift() {
     }
   }
 
-  setTimeout(popupSixty, 60000); //scrollBottom
+  setTimeout(popupSixty, 60000); // GiftForDon'tClickButtonAndScrollFullPage
 
-  function scrollBottom() {
-    var scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
+  window.onscroll = function () {
+    docScroll();
+  };
 
-    if (document.documentElement.scrollTop >= scrollHeight) {
-      alert('Высота с учетом прокрутки: ' + scrollHeight);
+  function docScroll() {
+    var windowScroll = document.body.scrollTop || document.documentElement.scrollTop,
+        documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight,
+        scrolled = windowScroll / documentHeight * 100;
+
+    if (scrolled == 100 && current == false) {
+      popupGift.classList.add('animated', 'fadeIn');
+      popupGift.style.display = 'block';
+      giftBtn.style.display = 'none';
     }
   }
-
-  scrollBottom();
 }
 
 module.exports = modalGift;

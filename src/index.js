@@ -1,4 +1,5 @@
 require('formdata-polyfill');
+//require('nodelist-foreach-polyfill');
 window.addEventListener('DOMContentLoaded', () => {
 
 "USE STRICT";
@@ -14,8 +15,6 @@ let sliderFirst = require('./parts/sliderFirst'),
     hoverPictures = require('./parts/hover'),
     hamburger = require('./parts/hamburger');
 
-
-
 sliderFirst();
 sliderFeedback();
 showStyle();
@@ -28,3 +27,14 @@ hoverPictures();
 hamburger();
 
 }); //конец DOMContentLoaded
+
+//polyfill for IE11
+if ('NodeList' in window && !NodeList.prototype.forEach) {
+  console.info('polyfill for IE11');
+  NodeList.prototype.forEach = function (callback, thisArg) {
+    thisArg = thisArg || window;
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}

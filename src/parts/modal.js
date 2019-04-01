@@ -4,13 +4,15 @@ function modalGift() {
       popupConsultation = document.querySelector('.popup-consultation'),
       designBtn = document.querySelectorAll('.button-design'),
       popupDisign = document.querySelector('.popup-design'),
-      popupGift = document.querySelector('.popup-gift');
+      popupGift = document.querySelector('.popup-gift'),
+      current = false;
 
 //Gift      
   giftBtn.addEventListener('click', () => {
     popupGift.classList.add('animated', 'fadeIn');
     popupGift.style.display = 'block';
     giftBtn.style.display = 'none';
+    current = true;
   });
 
   popupGift.addEventListener('click', (event) => {
@@ -26,7 +28,7 @@ function modalGift() {
     item.addEventListener('click', () => {
       popupConsultation.classList.add('animated', 'fadeIn');
       popupConsultation.style.display = 'block';
-      
+      current = true;
     });
   });
 
@@ -43,6 +45,7 @@ function modalGift() {
     item.addEventListener('click', () => {
       popupDisign.classList.add('animated', 'fadeIn');
       popupDisign.style.display = 'block';
+      current = true;
     });
   });
   
@@ -66,21 +69,22 @@ function modalGift() {
   }
   setTimeout(popupSixty, 60000);
 
-//scrollBottom
-  function scrollBottom() {
-    let scrollHeight = Math.max(
-        document.body.scrollHeight, document.documentElement.scrollHeight,
-        document.body.offsetHeight, document.documentElement.offsetHeight,
-        document.body.clientHeight, document.documentElement.clientHeight
-    );
-    if (document.documentElement.scrollTop >= scrollHeight) {
-      alert( 'Высота с учетом прокрутки: ' + scrollHeight );
+// GiftForDon'tClickButtonAndScrollFullPage
+
+  window.onscroll = function() {
+    docScroll();
+  };
+
+  function docScroll() {
+    let windowScroll = document.body.scrollTop || document.documentElement.scrollTop,
+    documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight,
+    scrolled = (windowScroll / documentHeight) * 100;
+
+    if (scrolled  == 100 && current == false) {
+      popupGift.classList.add('animated', 'fadeIn');
+      popupGift.style.display = 'block';
+      giftBtn.style.display = 'none';
     }
   }
-  scrollBottom();
-
-
-
-
 }
 module.exports = modalGift;
