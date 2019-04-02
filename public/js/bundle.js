@@ -11290,8 +11290,7 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js"); //require('nodelist-foreach-polyfill');
-
+__webpack_require__(/*! formdata-polyfill */ "./node_modules/formdata-polyfill/formdata.min.js");
 
 window.addEventListener('DOMContentLoaded', function () {
   "USE STRICT";
@@ -11523,17 +11522,10 @@ function filter() {
 
     for (var _i = 0; _i < portfolioBlock.length; _i++) {
       if (portfolioBlock[_i].classList == "portfolio-block all ".concat(this.className)) {
-        //        portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
         k++;
         portfolioWrapper.innerHTML += "<div class=\"portfolio-block all ".concat(this.className, "\">\n      <img src=\"img/portfolio/").concat(this.className, "-").concat(k, ".jpg\" alt=\"\">\n      </div>");
       }
     }
-    /*     portfolioBlock.forEach((item) => {
-          if (item.classList == `portfolio-block all ${this.className}`) {
-            portfolioWrapper.innerHTML += item.outerHTML;
-          }
-        }); */
-
 
     this.classList.add('active');
   }
@@ -11549,10 +11541,6 @@ function filter() {
     for (var _i2 = 1; _i2 <= portfolioBlock.length; _i2++) {
       portfolioWrapper.innerHTML += "<div class=\"portfolio-block all\">\n        <img src=\"img/portfolio-".concat(_i2, ".jpg\" alt=\"\">\n      </div>");
     }
-    /*     portfolioBlock.forEach((item) => {
-          portfolioWrapper.innerHTML += item.outerHTML;
-        }); */
-
 
     this.classList.add('active');
   }
