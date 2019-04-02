@@ -9,7 +9,8 @@ function modalGift() {
 
 //Gift      
   giftBtn.addEventListener('click', () => {
-    popupGift.classList.add('animated', 'fadeIn');
+    popupGift.classList.add('animated');
+    popupGift.classList.add('fadeIn');
     popupGift.style.display = 'block';
     giftBtn.style.display = 'none';
     current = true;
@@ -26,7 +27,8 @@ function modalGift() {
 //Consultation
   consultationBtn.forEach((item) => {
     item.addEventListener('click', () => {
-      popupConsultation.classList.add('animated', 'fadeIn');
+      popupConsultation.classList.add('animated');
+      popupConsultation.classList.add('fadeIn');
       popupConsultation.style.display = 'block';
       current = true;
     });
@@ -43,7 +45,8 @@ function modalGift() {
 //Design
   designBtn.forEach((item) => {
     item.addEventListener('click', () => {
-      popupDisign.classList.add('animated', 'fadeIn');
+      popupDisign.classList.add('animated');
+      popupDisign.classList.add('fadeIn');
       popupDisign.style.display = 'block';
       current = true;
     });
@@ -62,7 +65,8 @@ function modalGift() {
     if (popupConsultation.style.display !== 'block' &&
      popupGift.style.display !== 'block' &&
      popupDisign.style.display !== 'block') {
-      popupConsultation.classList.add('animated', 'fadeIn');
+      popupConsultation.classList.add('animated');
+      popupConsultation.classList.add('fadeIn');
       popupConsultation.style.display = 'block';
 
      }
@@ -81,7 +85,8 @@ function modalGift() {
     scrolled = (windowScroll / documentHeight) * 100;
 
     if (scrolled  == 100 && current == false) {
-      popupGift.classList.add('animated', 'fadeIn');
+      popupGift.classList.add('animated');
+      popupGift.classList.add('fadeIn');
       popupGift.style.display = 'block';
       giftBtn.style.display = 'none';
     }

@@ -18,9 +18,14 @@ function filter() {
     }
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
+    let k = 0;
     for (let i = 0; i < portfolioBlock.length; i++) {
       if (portfolioBlock[i].classList == `portfolio-block all ${this.className}`) {
-        portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
+//        portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
+        k++;
+      portfolioWrapper.innerHTML += `<div class="portfolio-block all ${this.className}">
+      <img src="img/portfolio/${this.className}-${k}.jpg" alt="">
+      </div>`;
       }
     }
 /*     portfolioBlock.forEach((item) => {
@@ -37,8 +42,10 @@ function filter() {
     }
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
-    for (let i = 0; i < portfolioBlock.length; i++) {
-      portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
+    for (let i = 1; i <= portfolioBlock.length; i++) {
+      portfolioWrapper.innerHTML += `<div class="portfolio-block all">
+        <img src="img/portfolio-${i}.jpg" alt="">
+      </div>`;
     }
 /*     portfolioBlock.forEach((item) => {
       portfolioWrapper.innerHTML += item.outerHTML;

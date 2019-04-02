@@ -16,7 +16,8 @@ function sliderFirst() {
     slides.forEach((item) => item.style.display = 'none');
 
     slides[slideIndex - 1].style.display = 'block';
-    slides[slideIndex - 1].classList.add('animated', 'fadeInDown');
+    slides[slideIndex - 1].classList.add('animated');
+    slides[slideIndex - 1].classList.add('fadeInDown');
   }
 
   let interval = runInterval();

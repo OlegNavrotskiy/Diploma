@@ -11519,10 +11519,13 @@ function filter() {
 
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
+    var k = 0;
 
     for (var _i = 0; _i < portfolioBlock.length; _i++) {
       if (portfolioBlock[_i].classList == "portfolio-block all ".concat(this.className)) {
-        portfolioWrapper.innerHTML += portfolioBlock[_i].outerHTML;
+        //        portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
+        k++;
+        portfolioWrapper.innerHTML += "<div class=\"portfolio-block all ".concat(this.className, "\">\n      <img src=\"img/portfolio/").concat(this.className, "-").concat(k, ".jpg\" alt=\"\">\n      </div>");
       }
     }
     /*     portfolioBlock.forEach((item) => {
@@ -11543,8 +11546,8 @@ function filter() {
     portfolioNo.style.display = 'none';
     portfolioWrapper.innerHTML = ' ';
 
-    for (var _i2 = 0; _i2 < portfolioBlock.length; _i2++) {
-      portfolioWrapper.innerHTML += portfolioBlock[_i2].outerHTML;
+    for (var _i2 = 1; _i2 <= portfolioBlock.length; _i2++) {
+      portfolioWrapper.innerHTML += "<div class=\"portfolio-block all\">\n        <img src=\"img/portfolio-".concat(_i2, ".jpg\" alt=\"\">\n      </div>");
     }
     /*     portfolioBlock.forEach((item) => {
           portfolioWrapper.innerHTML += item.outerHTML;
@@ -11865,7 +11868,8 @@ function modalGift() {
       current = false; //Gift      
 
   giftBtn.addEventListener('click', function () {
-    popupGift.classList.add('animated', 'fadeIn');
+    popupGift.classList.add('animated');
+    popupGift.classList.add('fadeIn');
     popupGift.style.display = 'block';
     giftBtn.style.display = 'none';
     current = true;
@@ -11880,7 +11884,8 @@ function modalGift() {
 
   consultationBtn.forEach(function (item) {
     item.addEventListener('click', function () {
-      popupConsultation.classList.add('animated', 'fadeIn');
+      popupConsultation.classList.add('animated');
+      popupConsultation.classList.add('fadeIn');
       popupConsultation.style.display = 'block';
       current = true;
     });
@@ -11895,7 +11900,8 @@ function modalGift() {
 
   designBtn.forEach(function (item) {
     item.addEventListener('click', function () {
-      popupDisign.classList.add('animated', 'fadeIn');
+      popupDisign.classList.add('animated');
+      popupDisign.classList.add('fadeIn');
       popupDisign.style.display = 'block';
       current = true;
     });
@@ -11910,7 +11916,8 @@ function modalGift() {
 
   function popupSixty() {
     if (popupConsultation.style.display !== 'block' && popupGift.style.display !== 'block' && popupDisign.style.display !== 'block') {
-      popupConsultation.classList.add('animated', 'fadeIn');
+      popupConsultation.classList.add('animated');
+      popupConsultation.classList.add('fadeIn');
       popupConsultation.style.display = 'block';
     }
   }
@@ -11927,7 +11934,8 @@ function modalGift() {
         scrolled = windowScroll / documentHeight * 100;
 
     if (scrolled == 100 && current == false) {
-      popupGift.classList.add('animated', 'fadeIn');
+      popupGift.classList.add('animated');
+      popupGift.classList.add('fadeIn');
       popupGift.style.display = 'block';
       giftBtn.style.display = 'none';
     }
@@ -11973,15 +11981,19 @@ function sliderFeedback() {
 
   prev.addEventListener('click', function () {
     plusSlides(-1);
-    slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
-    slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
+    slides[slideIndex - 1].classList.remove('animated');
+    slides[slideIndex - 1].classList.remove('fadeInRight');
+    slides[slideIndex - 1].classList.add('animated');
+    slides[slideIndex - 1].classList.add('fadeInLeft');
     clearInterval(interval);
     interval = runInterval();
   });
   next.addEventListener('click', function () {
     plusSlides(1);
-    slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
-    slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+    slides[slideIndex - 1].classList.remove('animated');
+    slides[slideIndex - 1].classList.remove('fadeInLeft');
+    slides[slideIndex - 1].classList.add('animated');
+    slides[slideIndex - 1].classList.add('fadeInRight');
     clearInterval(interval);
     interval = runInterval();
   });
@@ -11990,7 +12002,8 @@ function sliderFeedback() {
   function runInterval() {
     return setInterval(function () {
       plusSlides(1);
-      slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+      slides[slideIndex - 1].classList.add('animated');
+      slides[slideIndex - 1].classList.add('fadeInRight');
       clearInterval(interval);
       interval = runInterval();
     }, 5000);
@@ -12026,7 +12039,8 @@ function sliderFirst() {
       return item.style.display = 'none';
     });
     slides[slideIndex - 1].style.display = 'block';
-    slides[slideIndex - 1].classList.add('animated', 'fadeInDown');
+    slides[slideIndex - 1].classList.add('animated');
+    slides[slideIndex - 1].classList.add('fadeInDown');
   }
 
   var interval = runInterval();

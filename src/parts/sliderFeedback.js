@@ -27,16 +27,20 @@ showSlides(slideIndex += n);
 
 prev.addEventListener('click', () => {
 plusSlides(-1);
-slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
-slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
+slides[slideIndex - 1].classList.remove('animated');
+slides[slideIndex - 1].classList.remove('fadeInRight');
+slides[slideIndex - 1].classList.add('animated');
+slides[slideIndex - 1].classList.add('fadeInLeft');
 clearInterval(interval);
 interval = runInterval();
 
 });
 next.addEventListener('click', () => {
 plusSlides(1);
-slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
-slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+slides[slideIndex - 1].classList.remove('animated');
+slides[slideIndex - 1].classList.remove('fadeInLeft');
+slides[slideIndex - 1].classList.add('animated');
+slides[slideIndex - 1].classList.add('fadeInRight');
 clearInterval(interval);
 interval = runInterval();
 });
@@ -45,7 +49,8 @@ let interval = runInterval();
 function runInterval() {
   return setInterval(function() {
     plusSlides(1);
-    slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+    slides[slideIndex - 1].classList.add('animated');
+    slides[slideIndex - 1].classList.add('fadeInRight');
     clearInterval(interval);
     interval = runInterval();
   }, 5000);
