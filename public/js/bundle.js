@@ -11590,66 +11590,76 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
 
 function formAll() {
-  var message = {
-    loading: 'идет отправка',
-    success: 'отправлено',
-    failure: 'ошибка'
-  };
-  var form = document.querySelector("#formHome"),
-      input = form.getElementsByTagName("input"),
-      statusMessage = document.createElement("div");
-  statusMessage.classList.add("status");
+  function formHome() {
+    var message = {
+      loading: 'идет отправка',
+      success: 'отправлено',
+      failure: 'ошибка'
+    };
+    var mainForm = document.querySelector('#formHome'),
+        input = mainForm.getElementsByTagName("input"),
+        statusMessage = document.createElement('div');
+    statusMessage.classList.add('status');
 
-  function sendForm(elem) {
-    elem.addEventListener("submit", function (e) {
-      e.preventDefault();
-      elem.appendChild(statusMessage);
-      statusMessage.innerHTML = message.loading;
-      var formData = new FormData(elem);
+    function sendForm(form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        form.appendChild(statusMessage);
+        statusMessage.innerHTML = message.loading;
+        var formData = new FormData(form);
 
-      function postData(data) {
-        return new _Promise(function (resolve, reject) {
-          var request = new XMLHttpRequest();
-          request.open("POST", "smart.php");
-          request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+        function postData(data) {
+          return new _Promise(function (resolve, reject) {
+            var request = new XMLHttpRequest();
+            request.open("POST", "server.php");
+            request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            var obj = {};
+            data.forEach(function (value, key) {
+              obj[key] = value;
+            });
+            var json = JSON.stringify(obj);
 
-          request.onreadystatechange = function () {
-            if (request.readyState < 4) {
-              resolve();
-            } else if (request.readyState === 4) {
-              if (request.status == 200 && request.status < 3) {
+            request.onreadystatechange = function () {
+              if (request.readyState < 4) {
                 resolve();
-              } else {
-                reject();
+              } else if (request.readyState === 4) {
+                if (request.status == 200 && request.status < 3) {
+                  resolve();
+                } else {
+                  reject();
+                }
               }
-            }
-          };
+            };
 
-          request.send(data);
-        });
-      }
+            request.send(json);
+          });
+        } // End postData
 
-      function clearInputs() {
-        _toConsumableArray(input).forEach(function (elem) {
-          return elem.value = "";
-        });
-      }
 
-      function clearMessage() {
-        statusMessage.innerHTML = '';
-      }
+        function clearInputs() {
+          _toConsumableArray(input).forEach(function (elem) {
+            return elem.value = "";
+          });
+        }
 
-      postData(formData).then(function () {
-        return statusMessage.innerHTML = message.loading;
-      }).then(function () {
-        return statusMessage.innerHTML = message.success;
-      }).catch(function () {
-        return statusMessage.innerHTML = message.failure;
-      }).then(clearInputs).then(setTimeout(clearMessage, 3000));
-    });
+        function clearMessage() {
+          statusMessage.innerHTML = '';
+        }
+
+        postData(formData).then(function () {
+          return statusMessage.innerHTML = message.loading;
+        }).then(function () {
+          return statusMessage.innerHTML = message.success;
+        }).catch(function () {
+          return statusMessage.innerHTML = message.failure;
+        }).then(clearInputs).then(setTimeout(clearMessage, 3000));
+      });
+    }
+
+    sendForm(mainForm);
   }
 
-  sendForm(form); //Mask phone
+  formHome(); //Mask phone
 
   var inputPhone = document.getElementsByName("phone");
 
@@ -11696,14 +11706,7 @@ function formAll() {
     inputPhone[i].addEventListener("input", mask, false);
     inputPhone[i].addEventListener("focus", mask, false);
     inputPhone[i].addEventListener("blur", mask, false);
-  }
-  /*   inputPhone.forEach((item) => {
-      item.addEventListener("input", mask, false);
-      item.addEventListener("focus", mask, false);
-      item.addEventListener("blur", mask, false);
-    });
-   */
-  //input Text Rus
+  } //input Text Rus
 
 
   var inputName = document.getElementsByName("name"),
@@ -11722,41 +11725,35 @@ function formAll() {
   for (var _i2 = 0; _i2 < inputMessage.length; _i2++) {
     onlyRus(inputMessage[_i2]);
   }
-  /* 
-    inputName.forEach((item) => {
-      onlyRus(item);
-    });
-    inputMessage.forEach((item) => {
-      onlyRus(item);
-    });
-   */
-  //Form other
 
-
-  var formDesign = document.querySelector('#formDesign'),
-      formConsultation = document.querySelector('#formConsultation');
-
-  function formModal(form) {
+  function formModal() {
     var message = {
       loading: 'идет отправка',
       success: "<img src=\"img/send.png\" alt=\"\u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E\"><div class=\"status\">\u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E</div>",
       failure: "<img src=\"img/error.png\" alt=\"\u043E\u0448\u0438\u0431\u043A\u0430\"><div class=\"status\">\u043E\u0448\u0438\u0431\u043A\u0430</div>"
     };
-    statusMessage = document.createElement("div");
-    statusMessage.classList.add("status");
+    var mainForm = document.querySelector('#formDesign'),
+        formConsultation = document.querySelector('#formConsultation'),
+        statusMessage = document.createElement('div');
+    statusMessage.classList.add('status');
 
-    function sendForm(elem) {
-      elem.addEventListener("submit", function (e) {
-        e.preventDefault();
-        elem.appendChild(statusMessage);
+    function sendForm(form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        form.appendChild(statusMessage);
         statusMessage.innerHTML = message.loading;
-        var formData = new FormData(elem);
+        var formData = new FormData(form);
 
         function postData(data) {
           return new _Promise(function (resolve, reject) {
             var request = new XMLHttpRequest();
-            request.open("POST", "smart.php");
+            request.open("POST", "server.php");
             request.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            var obj = {};
+            data.forEach(function (value, key) {
+              obj[key] = value;
+            });
+            var json = JSON.stringify(obj);
 
             request.onreadystatechange = function () {
               if (request.readyState < 4) {
@@ -11770,9 +11767,10 @@ function formAll() {
               }
             };
 
-            request.send(data);
+            request.send(json);
           });
-        }
+        } // End postData
+
 
         postData(formData).then(function () {
           return statusMessage.innerHTML = message.loading;
@@ -11784,11 +11782,11 @@ function formAll() {
       });
     }
 
-    sendForm(form);
+    sendForm(mainForm);
+    sendForm(formConsultation);
   }
 
-  formModal(formDesign);
-  formModal(formConsultation);
+  formModal();
 }
 
 module.exports = formAll;

@@ -1,65 +1,72 @@
 function formAll() {
-  let message = {
-    loading: 'идет отправка',
-    success: 'отправлено',
-    failure: 'ошибка'
-  };
-
-  let form = document.querySelector("#formHome"),
-      input = form.getElementsByTagName("input"),
-      statusMessage = document.createElement("div");
-  statusMessage.classList.add("status");
-
-  function sendForm(elem) {
-    elem.addEventListener("submit", function (e) {
-      e.preventDefault();
-      elem.appendChild(statusMessage);
-      statusMessage.innerHTML = message.loading;
-      let formData = new FormData(elem);
-
-      function postData(data) {
-        return new Promise(function (resolve, reject) {
-          let request = new XMLHttpRequest();
-
-          request.open("POST", "smart.php");
-
-          request.setRequestHeader(
-            "Content-Type",
-            "application/json; charset=utf-8"
-          );
-
-          request.onreadystatechange = function () {
-            if (request.readyState < 4) {
-              resolve();
-            } else if (request.readyState === 4) {
-              if (request.status == 200 && request.status < 3) {
+  function formHome() {
+    let message = {
+      loading: 'идет отправка',
+      success: 'отправлено',
+      failure: 'ошибка'
+    };
+  
+    let mainForm = document.querySelector('#formHome'),
+        input = mainForm.getElementsByTagName("input"),
+        statusMessage = document.createElement('div');
+  
+    statusMessage.classList.add('status');
+  
+    function sendForm(form) {
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        form.appendChild(statusMessage);
+        statusMessage.innerHTML = message.loading;
+        let formData = new FormData(form);
+  
+  
+        function postData(data) {
+          return new Promise(function (resolve, reject) {
+            let request = new XMLHttpRequest();
+  
+            request.open("POST", "server.php");
+  
+            request.setRequestHeader(
+              "Content-Type",
+              "application/json; charset=utf-8"
+            );
+            let obj = {};
+            data.forEach(function (value, key) {
+              obj[key] = value;
+            });
+            let json = JSON.stringify(obj);
+            request.onreadystatechange = function () {
+              if (request.readyState < 4) {
                 resolve();
-              } else {
-                reject();
+              } else if (request.readyState === 4) {
+                if (request.status == 200 && request.status < 3) {
+                  resolve();
+                } else {
+                  reject();
+                }
               }
-            }
-          };
-          request.send(data);
-        });
-      }
-
-      function clearInputs() {
-        [...input].forEach(elem => (elem.value = ""));
-      }
-      function clearMessage() {
-        statusMessage.innerHTML = '';
-      }
-      postData(formData)
-        .then(() => (statusMessage.innerHTML = message.loading))
-        .then(() => (statusMessage.innerHTML = message.success))
-        .catch(() => (statusMessage.innerHTML = message.failure))
-        .then(clearInputs)
-        .then(setTimeout(clearMessage, 3000));
-    });
+            };
+            request.send(json);
+          });
+        } // End postData
+        function clearInputs() {
+          [...input].forEach(elem => (elem.value = ""));
+        }
+        function clearMessage() {
+          statusMessage.innerHTML = '';
+        }
+        postData(formData)
+          .then(() => (statusMessage.innerHTML = message.loading))
+          .then(() => (statusMessage.innerHTML = message.success))
+          .catch(() => (statusMessage.innerHTML = message.failure))
+          .then(clearInputs)
+          .then(setTimeout(clearMessage, 3000));
+      });
+    }
+    sendForm(mainForm);
   }
 
-  sendForm(form);
-
+  formHome();
   //Mask phone
   let inputPhone = document.getElementsByName("phone");
 
@@ -104,12 +111,7 @@ function formAll() {
     inputPhone[i].addEventListener("focus", mask, false);
     inputPhone[i].addEventListener("blur", mask, false);
   }
-/*   inputPhone.forEach((item) => {
-    item.addEventListener("input", mask, false);
-    item.addEventListener("focus", mask, false);
-    item.addEventListener("blur", mask, false);
-  });
- */
+
   //input Text Rus
   let inputName = document.getElementsByName("name"),
     inputMessage = document.getElementsByName("message");
@@ -124,69 +126,69 @@ function formAll() {
   for (let i = 0; i < inputMessage.length; i++) {
     onlyRus(inputMessage[i]);
   }
-/* 
-  inputName.forEach((item) => {
-    onlyRus(item);
-  });
-  inputMessage.forEach((item) => {
-    onlyRus(item);
-  });
- */
-  //Form other
- let formDesign = document.querySelector('#formDesign'),
-     formConsultation = document.querySelector('#formConsultation');
-  function formModal(form) {
+
+  function formModal() {
     let message = {
       loading: 'идет отправка',
       success: `<img src="img/send.png" alt="отправлено"><div class="status">отправлено</div>`,
       failure: `<img src="img/error.png" alt="ошибка"><div class="status">ошибка</div>`
-  };
-  statusMessage = document.createElement("div");
-  statusMessage.classList.add("status");
-
-  function sendForm(elem) {
-    elem.addEventListener("submit", function (e) {
-      e.preventDefault();
-      elem.appendChild(statusMessage);
-      statusMessage.innerHTML = message.loading;
-      let formData = new FormData(elem);
-
-      function postData(data) {
-        return new Promise(function (resolve, reject) {
-          let request = new XMLHttpRequest();
-
-          request.open("POST", "smart.php");
-
-          request.setRequestHeader(
-            "Content-Type",
-            "application/json; charset=utf-8"
-          );
-
-          request.onreadystatechange = function () {
-            if (request.readyState < 4) {
-              resolve();
-            } else if (request.readyState === 4) {
-              if (request.status == 200 && request.status < 3) {
+    };
+  
+    let mainForm = document.querySelector('#formDesign'),
+        formConsultation = document.querySelector('#formConsultation'),
+        statusMessage = document.createElement('div');
+  
+    statusMessage.classList.add('status');
+  
+    function sendForm(form) {
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        form.appendChild(statusMessage);
+        statusMessage.innerHTML = message.loading;
+        let formData = new FormData(form);
+  
+  
+        function postData(data) {
+          return new Promise(function (resolve, reject) {
+            let request = new XMLHttpRequest();
+  
+            request.open("POST", "server.php");
+  
+            request.setRequestHeader(
+              "Content-Type",
+              "application/json; charset=utf-8"
+            );
+            let obj = {};
+            data.forEach(function (value, key) {
+              obj[key] = value;
+            });
+            let json = JSON.stringify(obj);
+            request.onreadystatechange = function () {
+              if (request.readyState < 4) {
                 resolve();
-              } else {
-                reject();
+              } else if (request.readyState === 4) {
+                if (request.status == 200 && request.status < 3) {
+                  resolve();
+                } else {
+                  reject();
+                }
               }
-            }
-          };
-          request.send(data);
-        });
-      }
+            };
+            request.send(json);
+          });
+        } // End postData
 
-      postData(formData)
+        postData(formData)
         .then(() => (statusMessage.innerHTML = message.loading))
         .then(() => (form.innerHTML = message.success))
         .catch(() => (form.innerHTML = message.failure))
-    });
+      });
+    }
+    sendForm(mainForm);
+    sendForm(formConsultation);
   }
-  sendForm(form);
-  }
-  formModal(formDesign);
-  formModal(formConsultation);
+  
+  formModal();
 
 }
 module.exports = formAll;
