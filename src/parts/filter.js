@@ -21,18 +21,12 @@ function filter() {
     let k = 0;
     for (let i = 0; i < portfolioBlock.length; i++) {
       if (portfolioBlock[i].classList == `portfolio-block all ${this.className}`) {
-//        portfolioWrapper.innerHTML += portfolioBlock[i].outerHTML;
         k++;
       portfolioWrapper.innerHTML += `<div class="portfolio-block all ${this.className}">
       <img src="img/portfolio/${this.className}-${k}.jpg" alt="">
       </div>`;
       }
     }
-/*     portfolioBlock.forEach((item) => {
-      if (item.classList == `portfolio-block all ${this.className}`) {
-        portfolioWrapper.innerHTML += item.outerHTML;
-      }
-    }); */
     this.classList.add('active');
   }
 
@@ -47,9 +41,6 @@ function filter() {
         <img src="img/portfolio-${i}.jpg" alt="">
       </div>`;
     }
-/*     portfolioBlock.forEach((item) => {
-      portfolioWrapper.innerHTML += item.outerHTML;
-    }); */
     this.classList.add('active');
   }
 

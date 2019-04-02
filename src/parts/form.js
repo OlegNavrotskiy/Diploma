@@ -1,31 +1,31 @@
 function formAll() {
   function formHome() {
     let message = {
-      loading: 'идет отправка',
-      success: 'отправлено',
-      failure: 'ошибка'
+        loading: 'идет отправка',
+        success: 'отправлено',
+        failure: 'ошибка'
     };
-  
+
     let mainForm = document.querySelector('#formHome'),
         input = mainForm.getElementsByTagName("input"),
         statusMessage = document.createElement('div');
-  
+
     statusMessage.classList.add('status');
-  
+
     function sendForm(form) {
       form.addEventListener('submit', event => {
         event.preventDefault();
         form.appendChild(statusMessage);
         statusMessage.innerHTML = message.loading;
         let formData = new FormData(form);
-  
-  
+
+
         function postData(data) {
           return new Promise(function (resolve, reject) {
             let request = new XMLHttpRequest();
-  
+
             request.open("POST", "server.php");
-  
+
             request.setRequestHeader(
               "Content-Type",
               "application/json; charset=utf-8"
@@ -52,6 +52,7 @@ function formAll() {
         function clearInputs() {
           [...input].forEach(elem => (elem.value = ""));
         }
+
         function clearMessage() {
           statusMessage.innerHTML = '';
         }
@@ -74,8 +75,7 @@ function formAll() {
     elem.focus();
     if (elem.setSelectionRange) {
       elem.setSelectionRange(pos, pos);
-    }
-    else {
+    } else {
       if (elem.createTextRange) {
         let range = elem.createTextRange();
         range.collapse(true);
@@ -115,6 +115,7 @@ function formAll() {
   //input Text Rus
   let inputName = document.getElementsByName("name"),
     inputMessage = document.getElementsByName("message");
+
   function onlyRus(input) {
     input.addEventListener('keyup', () => {
       input.value = input.value.replace(/[^А-ЯЁ ]/ig, '');
@@ -133,27 +134,27 @@ function formAll() {
       success: `<img src="img/send.png" alt="отправлено"><div class="status">отправлено</div>`,
       failure: `<img src="img/error.png" alt="ошибка"><div class="status">ошибка</div>`
     };
-  
+
     let mainForm = document.querySelector('#formDesign'),
-        formConsultation = document.querySelector('#formConsultation'),
-        statusMessage = document.createElement('div');
-  
+      formConsultation = document.querySelector('#formConsultation'),
+      statusMessage = document.createElement('div');
+
     statusMessage.classList.add('status');
-  
+
     function sendForm(form) {
       form.addEventListener('submit', event => {
         event.preventDefault();
         form.appendChild(statusMessage);
         statusMessage.innerHTML = message.loading;
         let formData = new FormData(form);
-  
-  
+
+
         function postData(data) {
           return new Promise(function (resolve, reject) {
             let request = new XMLHttpRequest();
-  
+
             request.open("POST", "server.php");
-  
+
             request.setRequestHeader(
               "Content-Type",
               "application/json; charset=utf-8"
@@ -179,15 +180,15 @@ function formAll() {
         } // End postData
 
         postData(formData)
-        .then(() => (statusMessage.innerHTML = message.loading))
-        .then(() => (form.innerHTML = message.success))
-        .catch(() => (form.innerHTML = message.failure))
+          .then(() => (statusMessage.innerHTML = message.loading))
+          .then(() => (form.innerHTML = message.success))
+          .catch(() => (form.innerHTML = message.failure))
       });
     }
     sendForm(mainForm);
     sendForm(formConsultation);
   }
-  
+
   formModal();
 
 }

@@ -75,7 +75,7 @@ function modalGift() {
 
 // GiftForDon'tClickButtonAndScrollFullPage
 
-  window.onscroll = function() {
+  window.onscroll = () => {
     docScroll();
   };
 

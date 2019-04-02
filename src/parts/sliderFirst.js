@@ -1,6 +1,6 @@
 function sliderFirst() {
   let slideIndex = 1,
-  slides = document.querySelectorAll('.main-slider-item');
+      slides = document.querySelectorAll('.main-slider-item');
 
   showSlides(slideIndex);
 
@@ -21,12 +21,13 @@ function sliderFirst() {
   }
 
   let interval = runInterval();
+
   function plusSlides(n) {
     showSlides(slideIndex += n);
   }
 
   function runInterval() {
-    return setInterval(function() {
+    return setInterval(() => {
       plusSlides(1);
       clearInterval(interval);
       interval = runInterval();

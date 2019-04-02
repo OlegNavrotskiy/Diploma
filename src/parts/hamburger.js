@@ -6,7 +6,7 @@ function hamburger() {
       burgerMenu.classList.toggle("show");
     }
   });
-  window.addEventListener("resize", function() {
+  window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
       burgerMenu.classList.remove("show");
     }

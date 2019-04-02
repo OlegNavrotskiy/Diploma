@@ -1,7 +1,7 @@
 function accordion() {
 
   let heading = document.querySelectorAll('.accordion-heading'),
-    block = document.querySelectorAll('.accordion-block');
+      block = document.querySelectorAll('.accordion-block');
 
   function closeBlock() {
     block.forEach((item) => {
@@ -41,7 +41,7 @@ function accordion() {
           }
         });
       }
-      
+
     });
   }
 }
